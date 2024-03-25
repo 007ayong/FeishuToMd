@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         FeishuToMd
-// @namespace    https://win.gxzyzd.com
-// @version      0.1
+// @namespace    https://www.winapps.cc
+// @version      0.2
 // @description  将飞书文档复制为 Markdown 格式的纯文本
 // @author       ayong
 // @homepageURL  https://github.com/007ayong/FeishuToMd
+// @updateURL    https://github.com/007ayong/FeishuToMd/raw/master/FeishuToMd.user.js
 // @match        https://*.feishu.cn/docx/*
 // @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAwCAYAAABNPhkJAAAAAXNSR0IArs4c6QAAA4tJREFUaEPtmk9IFFEcx7+/MfAgoTt7CC9FtKNRlyAipSg9FJhE4SGPRQdhZ1vqUHQp1IqIPHjQHU2IoCBCkECQDh40AgtRokORzqqHqEO4sxXRpd35xfivdXd2Z3Zddx1n57TMvPf7vs/7vvd7b98MwWUXuYwXJeDt7ri7HfYo4Sbi+NGCuCwIXAgdPYbXP4LS+KrWksMeJdwGcBsBhwvRiEJrMDAN0EBU9g2Qt3+uhXV9qNCNKIYe63oziUr4DcDHi9GAImhOkKiovwDsLIJ4MSR/G8AFSR7FoDPTLAFvFSc2qx0lh5N7loFxjqMz+T4JXE1Ez205QRjVY7hvVlYow5hlDNY7dV1Y2zysbSLK0E5Ag2X9hAKWDhvAUVlqNAsqKrN3AbplIfgVTPVawPcluVxVj9pgF1gL1HYk1/co6lhBgY0GiEp4COCWtNA6n9au1IyaPXck8K6uDxV/KyqmAa5NGfZMwUjA15uuMxwJbMB4Q3NHmPTJRDAC90fkGn+m4e5Y4GXo2UtM9GQFcEKTpWNWycTRwCvz+SHAfjAdMEtS2yJppWbOcFNU9r2yctd47iiHxdBMh9lSYQZa2fN578/g/gVHOyz2qcaiPx/xS8+s3BRDsyNaoKbZ8cBgXBVApxZl33Q6aFEJdwF8XZOllPOzNEO6XpOld1admF5PvQagO93znHdahsNgdIBoSvPuq8MFiieLiH3qZTAeG/ezAI4J8fI9i8Hd37KF9ioz5xnCy0z1Ng5sRGcMagGpNVFIVNQ6AG9X72UBbFSZ1777atFBMbvQVaHZQwLRe6vy+QFeVmnXZOmO8cPzaK4SMX2KCL4cgZFpD5+SC7oXqoTy+CeAqwsJDAE4tyhLw15FHWbgbKJ4lg4vVWXgaVSWLlpBiIpqjCRjRFle+XTYEPsDcAigG8nKuQAvx6B7muy7nSFJvQCwbjpt/hy27NesklZKNCIKRvypf0K8ivqAgZs25NeK5NvhtNq5O7wSktCq+aXBVQFPn+onhpIN7NJ4sTq1TJc81pYlm4obBgYgEBoX/dK4p3fmDAnCiE3pdcVsAZsd8Qg7cHJpHbZ56XGYnprYOvH4rxGBgBOI8ySIKmxKZwecS9BNrvMRwMFcNSwdzjXwVq1XAt6qzuSrXW58meay16WueyFuzA1XffKQmAxc81FLvjKgE+K4+zstJzi00TaWHN5oD271+v8A7zodk7v3YDQAAAAASUVORK5CYII=
 // @grant        none
