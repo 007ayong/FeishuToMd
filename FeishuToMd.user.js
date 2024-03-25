@@ -31,7 +31,7 @@
     function convertToMarkdown() {
 
         // 选择需要处理的节点
-        const nodesToProcess = document.querySelectorAll('.heading-h2, .heading-h3, .text-block, .image-block, table, .list-content');
+        const nodesToProcess = document.querySelectorAll('.heading-h2, .heading-h3, .text-block, .image-block, table, .list-content, .inline-code');
 
         // 定义一个空的 Map 对象来保存节点信息
         const nodes = new Map();
@@ -42,17 +42,33 @@
             switch (true) {
                 case node.classList.contains('heading-h2'):
                     type = 'heading-h2';
-                    content = node.textContent.trim();
+                    content = node.textContent.trim().replace(/\u200B/g, '');
                     break;
                 case node.classList.contains('heading-h3'):
                     type = 'heading-h3';
-                    content = node.textContent.trim();
+                    content = node.textContent.trim().replace(/\u200B/g, '');
                     break;
                 case node.classList.contains('text-block'):
-                    // 判断文本节点是否在表格中
+                    // 排除表格
                     if (!node.closest || !node.closest('table')) {
+                        const spans = node.querySelectorAll('span');
+                        let textSet = new Set(); // 使用 Set 存储内容，确保不重复
+                        spans.forEach(span => {
+                            if (span.style.fontWeight === 'bold') {
+                                textSet.add('**' + span.textContent.replace(/\u200B/g, '') + '**');
+                            } else if (span.classList.contains('inline-code')) {
+                                // 如果是行内代码，将其文本内容用 `` 符号包裹起来
+                                textSet.add('`' + span.textContent.replace(/\u200B/g, '') + '`');
+                            } else if (
+                                // 没有子元素且任意父元素中不含.inline-code的类名
+                                span.childElementCount === 0 &&
+                                !span.closest('.inline-code')
+                            ) {
+                                textSet.add(span.textContent.replace(/\u200B/g, ''));
+                            }
+                        });
                         type = 'text-block';
-                        content = node.textContent.trim() == '\u200B' ? '<br/>' : node.textContent.trim();
+                        content = Array.from(textSet).join(''); // 转换 Set 为数组，并用 join 方法连接成字符串
                     }
                     break;
                 case node.classList.contains('image-block'):
@@ -69,14 +85,14 @@
                         const rowData = [];
                         const cells = row.querySelectorAll('td, th');
                         cells.forEach((cell) => {
-                            rowData.push(cell.textContent.trim());
+                            rowData.push(cell.textContent.trim().replace(/\u200B/g, ''));
                         });
                         content.rows.push(rowData);
                     });
                     break;
                 case node.classList.contains('list-content'):
                     type = 'list';
-                    content = node.textContent.trim();
+                    content = node.textContent.trim().replace(/\u200B/g, '');
                     break;
                 default:
                     break;
@@ -108,11 +124,14 @@
                     }
                     break;
                 case 'img':
-                    markdownContent += '![](https://)' + '\n\n';
+                    markdownContent += '![](https://)' + '\n<br />\n\n';
                     break;
                 case 'list':
                     markdownContent += '- ' + node.content + '\n\n'
                     break;
+                // case 'inline-code':
+                //     markdownContent += '`' + node.content + '`' + '\n\n'
+                //     break;
                 case 'table-block':
                     const table = node.content;
                     const rows = table.rows;
@@ -145,7 +164,6 @@
                     break;
             }
         }
-
         console.log(markdownContent);
         navigator.clipboard.writeText(markdownContent).then(() => {
             console.log("Markdown content copied to clipboard.");
@@ -153,9 +171,4 @@
             console.error("Failed to copy Markdown content to clipboard.");
         });
     }
-
-
-
-
-
 })();
